@@ -1,1 +1,1 @@
-# Part of libCore @ https://github.com/codemodify/libcore
+####### Part of libCore @ https://github.com/codemodify/libcore
