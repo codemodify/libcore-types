@@ -2,7 +2,7 @@
 #define __libcore_types_spec__
 
 //
-// Inspiref from https://github.com/golang/go/blob/master/src/builtin/builtin.go
+// Inspired from https://github.com/golang/go/blob/master/src/builtin/builtin.go
 //
 // EXPECTED TYPES to be defined based on a native storage type for an OS/Arch combo
 //
