@@ -45,23 +45,22 @@
 //
 //			To represet this in a easy to digest way we will consider the below, which will introduce language and terminology that will encourage safe types, coding and understanding of logic
 //
-//                            | known as               |                            |                        | used for (val change)  | used for (pointer change)  | also possible but don't, breaks the convention
-//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
-//			CASE - A          |                        |                            |                        |                        |                            |
-//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
-//			int*              | intRef                 | pointer to int             | intRef a;              |   *a = 5               | a = 0x1234                 |           *(a + 0) = 5 - aka change the first element
-//			int*              | mutArrayMutInts        | array of ints              | mutArrayMutInts a;     | a[0] = 5               | a = 0x1234                 | *a = 5 OR *(a + 0) = 5
-//			int const*        | mutArrayNonMutInts     | array of constant ints     | mutArrayNonMutInts a;  |                        | a = 0x1234                 |
-//			int* const        | nonMutArrayMutInts     | const array of ints        | nonMutArrayMutInts a;  | a[0] = 5               |                            | *a = 5 OR *(a + 0) = 5
-//			int const* const  | nonMutArrayNonMutInts  | const array of const ints  | nonMutArrayMutInts a;  |                        |                            |
-//			                  |                        |                            |                        |                        |                            |
-//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
-//			CASE - B          |                        |                            |                        |                        |                            |
-//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
-//			int**             |
-//          intRefRef a;      |
-//			int       *       |
-//			int const *       |
+//                            | known as               |                            |                          | used for (val change)  | used for (pointer change)  | also possible but don't, breaks the convention
+//			------------------|----------------------  |----------------------------|--------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			CASE - A          |                        |                            |                          |                        |                            |
+//			------------------|----------------------  |----------------------------|--------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			int*              | intRef                 | pointer to int             | intRef a;                |   *a = 5               | a = 0x1234                 |           *(a + 0) = 5 - aka change the first element in array
+//			int*              | mutArrayMutInts        | array of ints              | mutArrayMutInts a;       | a[0] = 5               | a = 0x1234                 | *a = 5 OR *(a + 0) = 5
+//			int const*        | mutArrayNonMutInts     | array of constant ints     | mutArrayNonMutInts a;    |                        | a = 0x1234                 |
+//			int* const        | nonMutArrayMutInts     | const array of ints        | nonMutArrayMutInts a;    | a[0] = 5               |                            | *a = 5 OR *(a + 0) = 5
+//			int const* const  | nonMutArrayNonMutInts  | const array of const ints  | nonMutArrayNonMutInts a; |                        |                            |
+//			intArray          |                        | `nonMutArrayMutInts` alias | intArray a;              | a[0] = 5               |                            | *a = 5 OR *(a + 0) = 5
+//			                  |                        |                            |                          |                        |                            |
+//			------------------|----------------------  |----------------------------|--------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			CASE - B          |                        |                            |                          |                        |                            |
+//			------------------|----------------------  |----------------------------|--------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			int**             | intRefRef              | pointer to pointer to int  | intRefRef a;             |  **a = 5               | a = 0x1234 OR *a = 0x1234  |         **(a + 0) = 5 - aka change the first element in array
+//			int**             | mutArrayMutInts        | array of ints              | mutArrayMutInts a;       | a[0] = 5               | a = 0x1234                 | *a = 5 OR *(a + 0) = 5
 //
 //		Taking the above as basis for simple, robust, safe and understandable approach to types
 //
