@@ -31,11 +31,11 @@
 //		int const *const constant_pointer_to_constant_int; EX: | compiler error | compiler error
 //
 //
-//		Next thing to pay attention to is arrays, array or arrays and their constant versions.
+//		Next thing to pay attention to is arrays, array of arrays and their constant versions.
 //		Also to keep in mind that "int a[10]" is the same as "int *const a" - aka constant pointer to mutable values
 //
 //		Issues:
-//			- int* can be interpreted as point to int or array of ints
+//			1. `int*` - can be interpreted as point to int or array of ints
 //
 //                      | known as             |                    |                     |
 //			------------|----------------------|--------------------|---------------------|---------------------------------
