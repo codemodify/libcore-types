@@ -20,29 +20,48 @@
 //		This madness applies to all types where pointers are involved.
 //
 //		To avoid confusion community also uses these rule: ALWAYS append the const qualifier
-//		This means the `const` applies to the thing on its left side
+//		This means the `const` applies to the thing on its left side. All this can be counter intuitive.
 //
-//		                                                       | change val     | change pointer
-//		                                                       | *p = 5         | p = 0x1234
-//		-------------------------------------------------------|----------------|----------------
-//		int       *      mutable_pointer_to_mutable_int;   EX: | ok             | ok
-//		int const *      mutable_pointer_to_constant_int;  EX: | compiler error | ok
-//		int       *const constant_pointer_to_mutable_int;  EX: | ok             | compiler error
-//		int const *const constant_pointer_to_constant_int; EX: | compiler error | compiler error
+//		                                                        | change val     | change pointer
+//		                                                        | *p = 5         | p = 0x1234
+//		--------------------------------------------------------|----------------|----------------
+//		int       *       mutable_pointer_to_mutable_int;   EX: | ok             | ok
+//		int const *       mutable_pointer_to_constant_int;  EX: | compiler error | ok
+//		int       * const constant_pointer_to_mutable_int;  EX: | ok             | compiler error
+//		int const * const constant_pointer_to_constant_int; EX: | compiler error | compiler error
 //
 //
 //		Next thing to pay attention to is arrays, array of arrays and their constant versions.
-//		Also to keep in mind that "int a[10]" is the same as "int *const a" - aka constant pointer to mutable values
+//		Also to keep in mind that "int a[10]" is the same as "int *const a" - aka constant pointer to mutable values.
+//		The size of the array you have to "carry it around" with you.
 //
-//		Issues:
-//			1. `int*` - can be interpreted as point to int or array of ints
+//		Issues: (english language)
+//			A. `int*`  - 	`pointer to int` OR
+//							`array of ints`
 //
-//                      | known as             |                    |                     |
-//			------------|----------------------|--------------------|---------------------|---------------------------------
-//			int*        | intRef               | intRef a;          | *a = 5 (change val) | a = 0x1234 (change pointer val)
-//			int**       | intRefRef            | intRefRef a;       | *a = 5              | a = 0x1234
-//			int       * |
-//			int const * |
+//			B. `int**` -	`pointer to pointer to int` OR
+//							`array of pointers to int`  OR
+//							`array of arrays if ints` aka 2d array
+//
+//			To represet this in a easy to digest way we will consider the below, which will introduce language and terminology that will encourage safe types, coding and understanding of logic
+//
+//                            | known as               |                            |                        | used for (val change)  | used for (pointer change)  | also possible but don't, breaks the convention
+//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			CASE - A          |                        |                            |                        |                        |                            |
+//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			int*              | intRef                 | pointer to int             | intRef a;              |   *a = 5               | a = 0x1234                 |           *(a + 0) = 5 - aka change the first element
+//			int*              | mutArrayMutInts        | array of ints              | mutArrayMutInts a;     | a[0] = 5               | a = 0x1234                 | *a = 5 OR *(a + 0) = 5
+//			int const*        | mutArrayNonMutInts     | array of constant ints     | mutArrayNonMutInts a;  |                        | a = 0x1234                 |
+//			int* const        | nonMutArrayMutInts     | const array of ints        | nonMutArrayMutInts a;  | a[0] = 5               |                            | *a = 5 OR *(a + 0) = 5
+//			int const* const  | nonMutArrayNonMutInts  | const array of const ints  | nonMutArrayMutInts a;  |                        |                            |
+//			                  |                        |                            |                        |                        |                            |
+//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			CASE - B          |                        |                            |                        |                        |                            |
+//			------------------|----------------------  |----------------------------|------------------------|------------------------|----------------------------|-------------------------------------------------------
+//			int**             |
+//          intRefRef a;      |
+//			int       *       |
+//			int const *       |
 //
 //		Taking the above as basis for simple, robust, safe and understandable approach to types
 //
