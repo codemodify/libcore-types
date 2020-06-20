@@ -84,11 +84,13 @@
 //
 
 // ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~
+// UNSIGNED + pointers
 
 // uint8		- is the set of all unsigned  8-bit integers, Range: 0 through 255.
 // uint16		- is the set of all unsigned 16-bit integers, Range: 0 through 65535.
 // uint32		- is the set of all unsigned 32-bit integers, Range: 0 through 4294967295.
 // uint64		- is the set of all unsigned 64-bit integers, Range: 0 through 18446744073709551615.
+//
 // uint			- convenience shortcut to one of the above that is efficient on a platform,
 //				  at least 32 bits in size. If already defined already => `#define uint` then `typedef uintXX uint`
 //
@@ -98,14 +100,15 @@
 // uint64Max	- max value for unsigned INT64
 // uintMin		- min value for unsigned INT
 //
-// uint8Ref  + uint8RefRef
-// uint16Ref + uint16RefRef
-// uint32Ref + uint32RefRef
-// uint64Ref + uint64RefRef
-// uintRef		- pointer, useful to change the original value, ex: *a = 1
-// uintRefRef	- pointer to pointer, useful to change the value of the pointer, ex: **a = new-pointer-val
+// uint8Ref  + mutArrayMutUint8  + mutArrayNonMutUint8  + nonMutArrayMutUint8  + nonMutArrayNonMutUint8  + uint8Array
+// uint16Ref + mutArrayMutUint16 + mutArrayNonMutUint16 + nonMutArrayMutUint16 + nonMutArrayNonMutUint16 + uint16Array
+// uint32Ref + mutArrayMutUint32 + mutArrayNonMutUint32 + nonMutArrayMutUint32 + nonMutArrayNonMutUint32 + uint32Array
+// uint64Ref + mutArrayMutUint64 + mutArrayNonMutUint64 + nonMutArrayMutUint64 + nonMutArrayNonMutUint64 + uint64Array
+// uintRef   + mutArrayMutUint   + mutArrayNonMutUint   + nonMutArrayMutUint   + nonMutArrayNonMutUint   + uintArray
+//
 
 // ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~
+// SIGNED + pointers
 
 // int8			- is the set of all signed  8-bit integers, Range: -128 through 127.
 // int16		- is the set of all signed 16-bit integers, Range: -32768 through 32767.
@@ -113,31 +116,33 @@
 // int64		- is the set of all signed 64-bit integers, Range: -9223372036854775808 through 9223372036854775807.
 //
 // int			- in theory convenience shortcut to one of the above that is efficient on a platform,
-//				  at least 32 bits in size. In reality it can be that can't redefine built-in types in C.
+//				  at least 32 bits in size. It can be that you can't redefine the existing type.
 //
-// intMin		- min value for signed INT
 // int8Min		- min value for signed INT8
 // int16Max		- max value for signed INT16
 // int32Max		- max value for signed INT32
 // int64Max		- max value for signed INT64
+// intMin		- min value for signed INT
 //
-// intRef,   intRefRef
-// int8Ref,  int8RefRef
-// int16Ref, int16RefRef
-// int32Ref, int32RefRef
-// int64Ref, int64RefRef
+// int8Ref  + mutArrayMutInt8  + mutArrayNonMutInt8  + nonMutArrayMutInt8  + nonMutArrayNonMutInt8  + int8Array
+// int16Ref + mutArrayMutInt16 + mutArrayNonMutInt16 + nonMutArrayMutInt16 + nonMutArrayNonMutInt16 + int16Array
+// int32Ref + mutArrayMutInt32 + mutArrayNonMutInt32 + nonMutArrayMutInt32 + nonMutArrayNonMutInt32 + int32Array
+// int64Ref + mutArrayMutInt64 + mutArrayNonMutInt64 + nonMutArrayMutInt64 + nonMutArrayNonMutInt64 + int64Array
+// intRef   + mutArrayMutInt   + mutArrayNonMutInt   + nonMutArrayMutInt   + nonMutArrayNonMutInt   + intArray
+//
 
 // ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~
+// FLOAT + pointers
 
 // float32		- is the set of all IEEE-754 32-bit floating-point numbers.
 // float64		- is the set of all IEEE-754 64-bit floating-point numbers.
 //
 // float		- in theory convenience shortcut to one of the above that is efficient on a platform,
-//				  In reality it can be that can't redefine built-in types in C.
+//				  it can be that you can't redefine the existing type.
 //
-// floatRef, floatRefRef
 // float32Ref, float32RefRef
 // float64Ref, float64RefRef
+// floatRef, floatRefRef
 
 // ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~ ~~~~
 
